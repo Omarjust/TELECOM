@@ -1,0 +1,30 @@
+{% extends 'empresas/layout.html' %}
+
+
+{% block content %}
+<center><h1>Show Orders</h1></center>
+
+<table class="table">
+   <thead>
+     <tr>
+       <th scope="col">NIT</th>
+       <th scope="col">Name</th>
+     </tr>
+   </thead>
+   <tbody>
+    
+    {% for cliente in clientes %}
+        <tr>
+            <td>{{ cliente.nit }}</td>
+            <td>{{ cliente.nombre_cliente }}</td>
+        </tr>
+        <td>
+            <button class="btn btn-warning"><a href="{% url 'update_url' cliente.nit %}">Update</a></button>
+            <button class="btn btn-danger"><a href="{% url 'delete_url' cliente.nit %}">Delete</a></button>
+        </td>
+        {% endfor %}
+    
+   
+   </tbody>
+ </table>
+{% endblock %}

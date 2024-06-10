@@ -1,0 +1,17 @@
+{% extends 'empresas/layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+   <title>Add Page</title>
+{% endblock %}
+
+{% block content %}
+<center><h1>Formulario clientes</h1></center>
+<div class="container">
+   <form method="post" class="jumbotron">
+       {% csrf_token %}
+       {{form|crispy}}
+       <input type="submit" value="Cambiar orden" class="btn btn-success">
+   </form>
+</div>
+{% endblock %}

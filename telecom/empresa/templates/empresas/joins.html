@@ -1,0 +1,95 @@
+{% extends 'empresas/layout.html' %}
+
+
+{% block content %}
+<h2>Compras por Cliente</h2>
+<table>
+    <tr>
+        <th>ID Compra</th>
+        <th>Fecha Compra</th>
+        <th>NIT Cliente</th>
+        <th>Nombre Cliente</th>
+    </tr>
+    {% for compra in compras %}
+    <tr>
+        <td>{{ compra.id_compra }}</td>
+        <td>{{ compra.fecha_compra }}</td>
+        <td>{{ compra.nit_cliente.nit }}</td>
+        <td>{{ compra.nit_cliente.nombre_cliente }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4">No hay compras registradas.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+<h2>Compras por Cliente (Right Join)</h2>
+<table>
+    <tr>
+        <th>ID Compra</th>
+        <th>Fecha Compra</th>
+        <th>NIT Cliente</th>
+        <th>Nombre Cliente</th>
+    </tr>
+    {% for compra in compras %}
+    <tr>
+        <td>{{ compra.id_compra }}</td>
+        <td>{{ compra.fecha_compra }}</td>
+        <td>{{ compra.nit_cliente.nit }}</td>
+        <td>{{ compra.nit_cliente.nombre_cliente }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4">No hay compras registradas para estos clientes.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+<h2>Compras por Cliente (Full Outer Join)</h2>
+<table>
+    <tr>
+        <th>ID Compra</th>
+        <th>Fecha Compra</th>
+        <th>NIT Cliente</th>
+        <th>Nombre Cliente</th>
+    </tr>
+    {% for compra in compras %}
+    <tr>
+        <td>{% if compra.id_compra %}{{ compra.id_compra }}{% else %}-{% endif %}</td>
+        <td>{% if compra.fecha_compra %}{{ compra.fecha_compra }}{% else %}-{% endif %}</td>
+        <td>{% if compra.nit_cliente %}{{ compra.nit_cliente.nit }}{% else %}-{% endif %}</td>
+        <td>{% if compra.nit_cliente %}{{ compra.nit_cliente.nombre_cliente }}{% else %}-{% endif %}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4">No hay compras registradas.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Producto Cartesiano</h2>
+<table>
+    <tr>
+        <th>Cliente</th>
+        <th>Compra</th>
+    </tr>
+    {% for  compra in compras %}
+    <tr>
+        <td>{{ cliente.nombre_cliente }}</td>
+        <td>{{ compra.fecha_compra }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="2">No hay datos disponibles.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+{% endblock %}

@@ -1,0 +1,220 @@
+<!-- all_data_table.html -->
+
+{% extends 'empresas/layout.html' %}
+
+
+{% block content %}
+<body>
+    <h1>All Data Table</h1>
+
+    <h2>Clientes</h2>
+    <table>
+        <tr>
+            <th>NIT</th>
+            <th>Nombre Cliente</th>
+        </tr>
+        {% for cliente in clientes %}
+        <tr>
+            <td>{{ cliente.nit }}</td>
+            <td>{{ cliente.nombre_cliente }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    <h2>Contactos</h2>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>telefono</th>
+        </tr>
+        {% for contacto in contactos %}
+        <tr>
+            <td>{{ contacto.nit.nombre_cliente}}</td>
+            <td>{{ contacto.telefono }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    <h2>Direccion</h2>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Direccion</th>
+        </tr>
+        {% for Direccion in direcciones %}
+        <tr>
+            <td>{{ Direccion.nit.nombre_cliente}}</td>
+            <td>{{ Direccion.direccion }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Compra</h2>
+    <table>
+        <tr>
+            <th>compra</th>
+            <th>fecha</th>
+            <th>cliente</th>
+        </tr>
+        {% for compra in compras %}
+        <tr>
+            <td>{{ compra.id_compra}}</td>
+            <td>{{ compra.fecha_compra }}</td>
+            <td>{{ compra.nit_cliente.nombre_cliente }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Servicios</h2>
+<table>
+    <tr>
+        <th>ID Servicio</th>
+        <th>Nombre Servicio</th>
+    </tr>
+    {% for servicio in servicios %}
+    <tr>
+        <td>{{ servicio.id_servicio }}</td>
+        <td>{{ servicio.nombre_servicio }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Subservicios</h2>
+<table>
+    <tr>
+        <th>ID Subservicio</th>
+        <th>Nombre Subservicio</th>
+        <th>Descripción</th>
+        <th>Precio de Venta</th>
+    </tr>
+    {% for subservicio in subservicios %}
+    <tr>
+        <td>{{ subservicio.id_subservicio }}</td>
+        <td>{{ subservicio.nombre_subservicio }}</td>
+        <td>{{ subservicio.descripcion }}</td>
+        <td>{{ subservicio.precio_venta }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Trabajadores</h2>
+<table>
+    <tr>
+        <th>ID Trabajador</th>
+        <th>Nombre Trabajador</th>
+    </tr>
+    {% for trabajador in trabajadores %}
+    <tr>
+        <td>{{ trabajador.id_trabajador }}</td>
+        <td>{{ trabajador.nombre_trabajador }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Componentes</h2>
+<table>
+    <tr>
+        <th>ID Componente</th>
+        <th>Nombre Componente</th>
+    </tr>
+    {% for componente in componentes %}
+    <tr>
+        <td>{{ componente.id_componente }}</td>
+        <td>{{ componente.nombre_componente }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+
+<h1>RELACIONES</h1>
+
+
+
+
+<h2>Realizar Compras</h2>
+<table>
+    <tr>
+        <th>Cliente</th>
+        <th>ID Compra</th>
+    </tr>
+    {% for RealizarCompra in realizar_compras %}
+    <tr>
+        <td>{{ RealizarCompra.nit_cliente.nombre_cliente }}</td>
+        <td>{{ RealizarCompra.id_compra.id_compra }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+<h2>Compras de Subservicios</h2>
+<table>
+    <tr>
+        <th>ID Compra</th>
+        <th>ID Subservicio</th>
+    </tr>
+    {% for CompraSubservicio in compra_subservicios %}
+    <tr>
+        <td>{{ CompraSubservicio.id_compra.fecha_compra }}</td>
+        <td>{{ CompraSubservicio.id_subservicio.nombre_subservicio }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Subservicios y Componentes</h2>
+<table>
+    <tr>
+        <th>Subservicio</th>
+        <th>Componente</th>
+        <th>Precio de Compra</th>
+    </tr>
+    {% for SubservicioComponente in subservicio_componentes %}
+    <tr>
+        <td>{{ SubservicioComponente.id_subservicio.nombre_subservicio }}</td>
+        <td>{{ SubservicioComponente.id_componente.nombre_componente }}</td>
+        <td>{{ SubservicioComponente.precio_compra }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+
+
+
+<h2>Pagos de Salario</h2>
+<table>
+    <tr>
+        <th>ID Pago</th>
+        <th>Trabajador</th>
+        <th>Fecha de Pago</th>
+        <th>Salario</th>
+    </tr>
+    {% for PagoSalario  in pagos_salarios %}
+    <tr>
+        <td>{{ PagoSalario.id_pago }}</td>
+        <td>{{ PagoSalario.id_trabajador.nombre_trabajador }}</td>
+        <td>{{ PagoSalario.fecha_pago }}</td>
+        <td>{{ PagoSalario.salario }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>
+    <table>
+        <ul>
+            {% for contacto in contactos %}
+                <li>{{ contacto.nit }} - {{ cliente.author.name }}</li>
+            {% endfor %}
+        </ul>
+        
+    </table>
+</h2>
+
+
+
+</body>
+{% endblock %}
