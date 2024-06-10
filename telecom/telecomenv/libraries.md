@@ -1,6 +1,6 @@
 Here is the list of the libraries:
 Package             Version
-------------------- -------
+
 asgiref             3.7.2
 crispy-bootstrap5   2024.2
 Django              5.0.3
